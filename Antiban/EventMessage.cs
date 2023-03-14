@@ -28,8 +28,7 @@ namespace Antiban
         /// </summary>
         public DateTime ExpireDateTime { get; set; }
 
-        public EventMessage(int id, string phone, DateTime dateTime, 
-            int priority)
+        public EventMessage(int id, string phone, DateTime dateTime, int priority)
         {
             Id = id;
             Phone = phone;
