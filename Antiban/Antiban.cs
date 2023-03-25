@@ -43,19 +43,14 @@ namespace Antiban
                 }
             }
             Dictionary.Add(eventMessage.Id, eventMessage);
-            //TODO
             PriorityQueue.Enqueue(eventMessage, eventMessage);
         }
-
-
         /// <summary>
         /// Вовзращает порядок отправок сообщений
         /// </summary>
         /// <returns></returns>
         public List<AntibanResult> GetResult()
         {
-            //TODO
-            //Example
             var result = new List<AntibanResult>();
             while (PriorityQueue.TryDequeue(out EventMessage? em, out _))
             {
@@ -65,10 +60,17 @@ namespace Antiban
                     SentDateTime = em.DateTime
                 });
             }
+            RepareQueue();
             return result;
         }
+        public void RepareQueue()
+        {
+            foreach (var (_, val) in Dictionary)
+            {
+                PriorityQueue.Enqueue(val, val);
+            }
+        }
     }
-
     public class EventMessageComparer : IComparer<EventMessage>
     {
         public int Compare(EventMessage? x, EventMessage? y)
@@ -81,5 +83,4 @@ namespace Antiban
             return x.DateTime.CompareTo(y.DateTime);
         }
     }
-
 }
